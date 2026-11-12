@@ -6,6 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -14,6 +17,7 @@ import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -73,7 +77,9 @@ class MainActivity : ComponentActivity() {
         // language
         Util.setLocale(ctx, spf.language)
 
-        val lastTab = spf.activeTab
+        val firstBrasilLaunch = BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING && !spf.prefs.getBoolean("brasil_dashboard_seen", false)
+        val lastTab = if(firstBrasilLaunch) spam.blocker.ui.brasil.PROTECTION_ROUTE else spf.activeTab
+        if(firstBrasilLaunch) { spf.prefs.edit().putBoolean("brasil_dashboard_seen",true).apply(); spf.activeTab=lastTab }
 
         G.bottomBarVM = BottomBarViewModel(
             onTabSelected = { spf.activeTab = it },
@@ -89,10 +95,10 @@ class MainActivity : ComponentActivity() {
                     Def.SMS_TAB_ROUTE -> G.smsVM.markAllAsRead(this)
                 }
             },
-            tabItems = listOf(
+            tabItems = (if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) listOf(TabItem(spam.blocker.ui.brasil.PROTECTION_ROUTE, "Proteção", R.drawable.ic_brasil_shield, mutableStateOf(lastTab == spam.blocker.ui.brasil.PROTECTION_ROUTE), { null }) { spam.blocker.ui.brasil.ProtectionScreen() }) else emptyList()) + listOf(
                 TabItem(
                     route = Def.CALL_TAB_ROUTE,
-                    label = ctx.resources.getString(R.string.call),
+                    label = if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) "Chamadas" else ctx.resources.getString(R.string.call),
                     icon = R.drawable.ic_call,
                     isSelected = mutableStateOf(lastTab == Def.CALL_TAB_ROUTE),
                     badgeText = {
@@ -104,7 +110,7 @@ class MainActivity : ComponentActivity() {
                 },
                 TabItem(
                     route = Def.SMS_TAB_ROUTE,
-                    label = ctx.resources.getString(R.string.sms),
+                    label = if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) "Mensagens" else ctx.resources.getString(R.string.sms),
                     icon = R.drawable.ic_sms,
                     isSelected = mutableStateOf(lastTab == Def.SMS_TAB_ROUTE),
                     badgeText = {
@@ -116,7 +122,7 @@ class MainActivity : ComponentActivity() {
                 },
                 TabItem(
                     route = Def.SETTING_TAB_ROUTE,
-                    label = ctx.resources.getString(R.string.setting),
+                    label = if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) "Ajustes" else ctx.resources.getString(R.string.setting),
                     icon = R.drawable.ic_settings,
                     isSelected = mutableStateOf(lastTab == Def.SETTING_TAB_ROUTE),
                     badgeText = { null },
@@ -131,6 +137,12 @@ class MainActivity : ComponentActivity() {
                 // fix white statusbar text when forced to white theme
                 WindowCompat.getInsetsController(window, LocalView.current)
                     .isAppearanceLightStatusBars = G.palette.background.isLight()
+
+                val currentView=LocalView.current
+                if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) SideEffect {
+                    window.isNavigationBarContrastEnforced=false
+                    WindowCompat.getInsetsController(window, currentView).isAppearanceLightNavigationBars=G.palette.background.isLight()
+                }
 
                 // Prepare for the permission launcher
                 G.permissionChain.Compose()
@@ -150,6 +162,7 @@ class MainActivity : ComponentActivity() {
     private fun Main() {
         val C = G.palette
         val ctx = LocalContext.current
+        val compactLandscape=LocalConfiguration.current.screenHeightDp<400
 
         // Load all records to show unread badge in the bottom bar.
         LaunchedEffect(showHistoryPassed.value, showHistoryBlocked.value) {
@@ -185,18 +198,14 @@ class MainActivity : ComponentActivity() {
                     }
                 },
                 bottomBar = {
-                    BottomBar(G.bottomBarVM)
+                    if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) { if(!compactLandscape) spam.blocker.ui.brasil.BrasilBottomBar() } else BottomBar(G.bottomBarVM)
                 }
             ) { scaffoldPadding ->
-                Column(
-                    modifier = M
-                        .padding(scaffoldPadding)
-                        .fillMaxSize()
-                ) {
-                    G.bottomBarVM.tabItems.forEach {
-                        if (it.isSelected.value) {
-                            it.content()
-                        }
+                Row(modifier=M.padding(scaffoldPadding).fillMaxSize()) {
+                    if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING && compactLandscape) spam.blocker.ui.brasil.BrasilNavigationRail()
+                    Column(modifier=M.weight(1f).fillMaxHeight()) {
+                        if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) spam.blocker.ui.brasil.BrasilPageHeader()
+                        G.bottomBarVM.tabItems.forEach { if(it.isSelected.value) it.content() }
                     }
                 }
             }

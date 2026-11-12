@@ -441,6 +441,8 @@ fun HistoryFabs(
         Fab(
             visible = visible,
             iconId = R.drawable.ic_settings,
+            text=if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) "Exibição" else null,
+            iconSize=if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 20 else 40,
             bgColor = C.infoBlue
         ) {
             settingPopupTrigger.value = true
@@ -472,6 +474,8 @@ fun HistoryFabs(
         Fab(
             visible = visible,
             iconId = R.drawable.ic_recycle_bin,
+            text=if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) "Limpar" else null,
+            iconSize=if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 20 else 40,
             bgColor = C.error
         ) {
             deleteConfirm.value = true

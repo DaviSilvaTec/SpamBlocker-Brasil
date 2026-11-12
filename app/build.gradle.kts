@@ -32,12 +32,20 @@ android {
         targetSdk = 36
         versionCode = 518
         versionName = "5.18"
+        buildConfigField("boolean", "BRAZIL_LOCAL_CONTACT_MATCHING", "false")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     flavorDimensions += "market"
     productFlavors {
+        create("brasil") {
+            dimension = "market"
+            applicationId = "spam.blocker.brasil"
+            versionCode = 51807
+            versionName = "5.18.1-rc.2"
+            buildConfigField("boolean", "BRAZIL_LOCAL_CONTACT_MATCHING", "true")
+        }
         create("fdroid") {
             dimension = "market"
             applicationId = "spam.blocker"
@@ -96,6 +104,10 @@ android {
     }
 }
 
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+}
+
 tasks.configureEach {
     if (name.contains("ReleaseNoR8") && name.contains("lintVital", ignoreCase = true)) {
         enabled = false
@@ -126,7 +138,10 @@ dependencies {
 
     // testing
     testImplementation(libs.junit.jupiter)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:${libs.versions.junitJupiter.get()}")
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.mockk)
 }

@@ -13,6 +13,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.platform.LocalContext
+import spam.blocker.BuildConfig
+import spam.blocker.def.Def
 import androidx.compose.ui.unit.dp
 import spam.blocker.ui.M
 import spam.blocker.ui.widgets.FabWrapper
@@ -71,13 +73,14 @@ fun HistoryScreen(
         fabRow = { positionModifier ->
             // Two FABs
             HistoryFabs(
-                visible = fabVisible,
+                visible = fabVisible && !BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING,
                 vm = vm,
                 modifier = positionModifier,
             )
         }
     ) {
-        Column(modifier = M.padding(8.dp, 8.dp, 8.dp, 2.dp)) {
+        Column(modifier = M.padding(if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 16.dp else 8.dp,8.dp,if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 16.dp else 8.dp,2.dp)) {
+            if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) HistoryFabs(visible=true,vm=vm,modifier=M.padding(bottom=12.dp))
             // Use a Debouncer here as there could be LOTS of history records.
             val debouncer = remember { LockedDebouncer() }
             SearchBox(vm.searchEnabled, vm.filter) {

@@ -9,4 +9,6 @@ app/release/
 app/debug/
 auto_translate/go.sum
 local.properties
+/artifacts/**/*.apk
+/artifacts/*.zip
 auto_translate/.vscode/

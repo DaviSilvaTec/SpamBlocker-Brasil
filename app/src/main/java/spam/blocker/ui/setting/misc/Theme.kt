@@ -38,6 +38,18 @@ fun EditThemeDialog(trigger: MutableState<Boolean>) {
 
 @Composable
 fun Theme() {
+    if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) {
+        val trigger=remember { mutableStateOf(false) }
+        EditThemeDialog(trigger)
+        androidx.compose.foundation.layout.Column {
+            LabeledRow(R.string.theme) {
+                StrokeButton("Claro",color=G.palette.infoBlue) { spam.blocker.ui.brasil.applyBrasilTheme(true) }
+                StrokeButton("Escuro",color=G.palette.infoBlue) { spam.blocker.ui.brasil.applyBrasilTheme(false) }
+            }
+            StrokeButton("Personalizar cores",color=G.palette.infoBlue) { trigger.value=true }
+        }
+        return
+    }
     LabeledRow(R.string.theme) {
         val trigger = remember { mutableStateOf(false) }
         EditThemeDialog(trigger)

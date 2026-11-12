@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.contentDescription
 import spam.blocker.G
 import spam.blocker.ui.darken
 
@@ -30,6 +32,13 @@ fun SwitchBox(
     onCheckedChange: (Boolean) -> Unit
 ) {
     val C = G.palette
+    if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) {
+        val accessibleLabel=spam.blocker.ui.brasil.LocalSettingLabel.current
+        androidx.compose.material3.Switch(checked=checked,onCheckedChange=onCheckedChange,
+            modifier=Modifier.size(width=52.dp,height=48.dp).semantics { contentDescription=accessibleLabel },
+            colors=androidx.compose.material3.SwitchDefaults.colors(checkedThumbColor=C.background,checkedTrackColor=C.teal200,uncheckedThumbColor=C.disabled,uncheckedTrackColor=C.background,uncheckedBorderColor=C.disabled))
+        return
+    }
 
     val thumbOffset by animateIntAsState(
         targetValue = if (checked) ThumbRadius else -ThumbRadius,

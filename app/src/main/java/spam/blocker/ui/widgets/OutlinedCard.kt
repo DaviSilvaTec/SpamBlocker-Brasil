@@ -23,10 +23,10 @@ fun OutlineCard(
     OutlinedCard(
         modifier = modifier,
         colors = CardDefaults.cardColors(
-            containerColor = containerBg,
+            containerColor = if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) G.palette.dialogBg else containerBg,
         ),
         border = BorderStroke(width = borderWidth.dp, color = borderColor),
-        shape = RoundedCornerShape(6.dp),
+        shape = RoundedCornerShape(if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 18.dp else 6.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
         content()

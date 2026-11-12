@@ -1,0 +1,102 @@
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preBrasilDebugBuild UP-TO-DATE
+> Task :app:dataBindingMergeDependencyArtifactsBrasilDebug UP-TO-DATE
+> Task :app:generateBrasilDebugResources UP-TO-DATE
+> Task :app:mergeBrasilDebugResources UP-TO-DATE
+> Task :app:packageBrasilDebugResources UP-TO-DATE
+> Task :app:processBrasilDebugNavigationResources UP-TO-DATE
+> Task :app:parseBrasilDebugLocalResources UP-TO-DATE
+> Task :app:dataBindingGenBaseClassesBrasilDebug UP-TO-DATE
+> Task :app:generateBrasilDebugBuildConfig
+> Task :app:generateBrasilDebugRFile UP-TO-DATE
+> Task :app:javaPreCompileBrasilDebug UP-TO-DATE
+> Task :app:checkBrasilDebugAarMetadata UP-TO-DATE
+> Task :app:mapBrasilDebugSourceSetPaths UP-TO-DATE
+> Task :app:compileBrasilDebugNavigationResources UP-TO-DATE
+> Task :app:createBrasilDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksBrasilDebug UP-TO-DATE
+> Task :app:processBrasilDebugMainManifest
+> Task :app:processBrasilDebugManifest
+> Task :app:preBrasilDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileBrasilDebugUnitTest UP-TO-DATE
+> Task :app:mergeBrasilDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateBrasilDebugAssets UP-TO-DATE
+> Task :app:mergeBrasilDebugAssets UP-TO-DATE
+> Task :app:compressBrasilDebugAssets UP-TO-DATE
+> Task :app:generateBrasilDebugGlobalSynthetics UP-TO-DATE
+> Task :app:checkBrasilDebugDuplicateClasses UP-TO-DATE
+> Task :app:desugarBrasilDebugFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexBrasilDebug UP-TO-DATE
+> Task :app:mergeLibDexBrasilDebug UP-TO-DATE
+> Task :app:mergeBrasilDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeBrasilDebugNativeLibs UP-TO-DATE
+> Task :app:stripBrasilDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningBrasilDebug UP-TO-DATE
+> Task :app:writeBrasilDebugAppMetadata UP-TO-DATE
+> Task :app:writeBrasilDebugSigningConfigVersions UP-TO-DATE
+> Task :app:preBrasilDebugAndroidTestBuild SKIPPED
+> Task :app:dataBindingMergeDependencyArtifactsBrasilDebugAndroidTest UP-TO-DATE
+> Task :app:generateBrasilDebugAndroidTestResources UP-TO-DATE
+> Task :app:mergeBrasilDebugAndroidTestResources UP-TO-DATE
+> Task :app:dataBindingGenBaseClassesBrasilDebugAndroidTest UP-TO-DATE
+> Task :app:mergeBrasilDebugAndroidTestManifest UP-TO-DATE
+> Task :app:processBrasilDebugAndroidTestManifest UP-TO-DATE
+> Task :app:generateBrasilDebugAndroidTestBuildConfig UP-TO-DATE
+> Task :app:packageBrasilDebugAndroidTestResources UP-TO-DATE
+> Task :app:processBrasilDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:parseBrasilDebugAndroidTestLocalResources UP-TO-DATE
+> Task :app:generateBrasilDebugAndroidTestRFile UP-TO-DATE
+> Task :app:javaPreCompileBrasilDebugAndroidTest UP-TO-DATE
+> Task :app:generateBrasilDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeBrasilDebugAndroidTestAssets UP-TO-DATE
+> Task :app:compressBrasilDebugAndroidTestAssets UP-TO-DATE
+> Task :app:generateBrasilDebugAndroidTestGlobalSynthetics UP-TO-DATE
+> Task :app:checkBrasilDebugAndroidTestDuplicateClasses UP-TO-DATE
+> Task :app:desugarBrasilDebugAndroidTestFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexBrasilDebugAndroidTest UP-TO-DATE
+> Task :app:mergeLibDexBrasilDebugAndroidTest UP-TO-DATE
+> Task :app:checkBrasilDebugAndroidTestAarMetadata UP-TO-DATE
+> Task :app:mapBrasilDebugAndroidTestSourceSetPaths UP-TO-DATE
+> Task :app:compileBrasilDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:processBrasilDebugAndroidTestResources UP-TO-DATE
+> Task :app:mergeBrasilDebugAndroidTestJniLibFolders UP-TO-DATE
+> Task :app:mergeBrasilDebugAndroidTestNativeLibs UP-TO-DATE
+> Task :app:stripBrasilDebugAndroidTestDebugSymbols UP-TO-DATE
+> Task :app:validateSigningBrasilDebugAndroidTest UP-TO-DATE
+> Task :app:writeBrasilDebugAndroidTestSigningConfigVersions UP-TO-DATE
+> Task :app:processBrasilDebugManifestForPackage
+> Task :app:processBrasilDebugResources
+> Task :app:compileBrasilDebugKotlin
+> Task :app:compileBrasilDebugJavaWithJavac
+> Task :app:processBrasilDebugJavaRes UP-TO-DATE
+> Task :app:mergeBrasilDebugJavaResource UP-TO-DATE
+> Task :app:bundleBrasilDebugClassesToRuntimeJar
+> Task :app:bundleBrasilDebugClassesToCompileJar
+> Task :app:dexBuilderBrasilDebug
+> Task :app:mergeProjectDexBrasilDebug
+> Task :app:compileBrasilDebugUnitTestKotlin
+> Task :app:compileBrasilDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processBrasilDebugUnitTestJavaRes UP-TO-DATE
+
+> Task :app:compileBrasilDebugAndroidTestKotlin
+w: file:///home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/androidTest/java/spam/blocker/ui/BrasilInterfaceTest.kt:16:29 'fun <reified A : ComponentActivity> createAndroidComposeRule(effectContext: CoroutineContext = ...): AndroidComposeTestRule<ActivityScenarioRule<A>, A>' is deprecated. Use `androidx.compose.ui.test.junit4.v2.createAndroidComposeRule` instead. The v2 APIs use StandardTestDispatcher instead of UnconfinedTestDispatcher, which aligns with standard coroutine behavior by queuing tasks rather than executing them immediately. Tests relying on immediate execution may require explicit synchronization. Please refer to the migration guide for more details.
+w: file:///home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/androidTest/java/spam/blocker/ui/BrasilVisualCaptureTest.kt:21:27 'fun <reified A : ComponentActivity> createAndroidComposeRule(effectContext: CoroutineContext = ...): AndroidComposeTestRule<ActivityScenarioRule<A>, A>' is deprecated. Use `androidx.compose.ui.test.junit4.v2.createAndroidComposeRule` instead. The v2 APIs use StandardTestDispatcher instead of UnconfinedTestDispatcher, which aligns with standard coroutine behavior by queuing tasks rather than executing them immediately. Tests relying on immediate execution may require explicit synchronization. Please refer to the migration guide for more details.
+
+> Task :app:testBrasilDebugUnitTest
+> Task :app:compileBrasilDebugAndroidTestJavaWithJavac UP-TO-DATE
+> Task :app:processBrasilDebugAndroidTestJavaRes UP-TO-DATE
+> Task :app:mergeBrasilDebugAndroidTestJavaResource UP-TO-DATE
+> Task :app:dexBuilderBrasilDebugAndroidTest
+> Task :app:mergeProjectDexBrasilDebugAndroidTest
+> Task :app:packageBrasilDebug
+> Task :app:createBrasilDebugApkListingFileRedirect
+> Task :app:assembleBrasilDebug
+> Task :app:packageBrasilDebugAndroidTest
+> Task :app:createBrasilDebugAndroidTestApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleBrasilDebugAndroidTest
+
+[Incubating] Problems report is available at: file:///home/usuario/workspace/altec/Bloqueador_de_chamadas/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 23s
+82 actionable tasks: 20 executed, 62 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.7.1/userguide/configuration_cache_enabling.html

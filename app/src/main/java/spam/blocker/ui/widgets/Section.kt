@@ -33,6 +33,10 @@ fun Section(
     contentCollapsed: (@Composable () -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
+    if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) {
+        spam.blocker.ui.brasil.BrasilSection(title,isCollapsed,onToggle,contentCollapsed,content)
+        return
+    }
     Box(
         modifier = M
             .padding(top = 8.dp, bottom = 8.dp)

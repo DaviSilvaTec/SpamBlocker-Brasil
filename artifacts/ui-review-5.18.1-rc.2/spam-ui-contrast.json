@@ -1,0 +1,16 @@
+{
+  "dark": {
+    "body_on_surface": 11.5,
+    "muted_body_on_surface": 7.15,
+    "primary_on_surface": 8.74,
+    "primary_button_text": 10.54,
+    "error_on_surface": 6.72
+  },
+  "light": {
+    "body_on_surface": 11.43,
+    "muted_body_on_surface": 5.37,
+    "primary_on_surface": 6.29,
+    "primary_button_text": 5.79,
+    "error_on_surface": 6.36
+  }
+}

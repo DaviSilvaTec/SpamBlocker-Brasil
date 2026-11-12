@@ -1,3 +1,11 @@
+# SpamBlocker Brasil
+
+Fork brasileiro de [aj3423/SpamBlocker](https://github.com/aj3423/SpamBlocker), baseado em v5.18.
+
+Veja [BRASIL.md](BRASIL.md) para as mudanças de contatos e interface, compilação e evidências da RC2. O [plano de auditoria](docs/PLANO_AUDITORIA_CORRECOES.md) contém os achados e as correções pendentes. APKs de desenvolvimento e capturas estão em `artifacts/`.
+
+---
+
 # 🙏 Help wanted
 
 > [!NOTE]  

@@ -16,6 +16,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
+import androidx.compose.foundation.layout.PaddingValues
+import spam.blocker.BuildConfig
 import androidx.compose.ui.unit.dp
 import spam.blocker.R
 import spam.blocker.def.Def
@@ -56,9 +59,12 @@ fun HistoryList(
     LazyScrollbar(state = lazyState) {
         IndicatorsWrapper(vm) { indicatorChecker, forceRefreshIndicators ->
             LazyColumn(
+                modifier=M.testTag("history-list"),
+                contentPadding=PaddingValues(bottom=16.dp),
                 state = lazyState,
-                verticalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 10.dp else 4.dp),
             ) {
+                if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING && vm.records.isEmpty()) item { spam.blocker.ui.brasil.BrasilEmptyHistory(vm.forType == Def.ForSms) }
                 itemsIndexed(items = vm.records, key = { _, it -> it.id }) { index, record ->
                     val indicators = remember { mutableStateOf(listOf<Indicator>()) }
 
@@ -129,7 +135,7 @@ fun HistoryList(
                                 indicators = indicators.value,
                                 simCount = simCount,
                                 timeColors = if (showHistoryTimeColor.value) historyTimeColors else null,
-                                modifier = M.combinedClickable(
+                                modifier = M.testTag("history-row-${record.id}").combinedClickable(
                                     onClick = {
                                         if (!record.read) {
                                             // 1. update db

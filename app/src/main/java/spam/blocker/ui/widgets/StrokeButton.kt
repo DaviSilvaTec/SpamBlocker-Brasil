@@ -71,7 +71,7 @@ fun Button(
 
     Box(
         modifier = modifier
-            .heightIn(min = BUTTON_H.dp)
+            .heightIn(min = (if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 48 else BUTTON_H).dp)
             .border(
                 width = borderWidth,
                 color = if (enabled) borderColor else C.disabled,
@@ -110,7 +110,7 @@ fun StrokeButton(
     onClick: Lambda? = null,
 ) {
     Button(
-        modifier = modifier.heightIn(min = BUTTON_H.dp),
+        modifier = modifier.heightIn(min = (if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 48 else BUTTON_H).dp),
         enabled = enabled,
         onLongClick = onLongClick,
         contentPadding = contentPadding,

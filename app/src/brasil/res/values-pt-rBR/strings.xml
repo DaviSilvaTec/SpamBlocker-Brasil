@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SpamBlocker Brasil</string>
+    <string name="quick_settings">Regras de chamadas</string>
+    <string name="regex_settings">Regras avançadas</string>
+    <string name="instant_query">Consulta de reputação</string>
+    <string name="report_number">Relatórios de spam</string>
+    <string name="miscellaneous">Sobre o aplicativo</string>
+    <string name="screening">Status de proteção</string>
+    <string name="theme">Aparência</string>
+</resources>

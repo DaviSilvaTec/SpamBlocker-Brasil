@@ -8,7 +8,9 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.provider.ContactsContract
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership
+import android.provider.ContactsContract.CommonDataKinds.Phone
 import android.provider.ContactsContract.PhoneLookup
+import spam.blocker.BuildConfig
 
 data class ContactInfo(
     val id: String,
@@ -92,7 +94,42 @@ object Contacts {
                 return ci
             }
         }
-        return null
+        return if (BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) {
+            findBrazilianContactWithoutAreaCode(ctx, rawNumber)
+        } else {
+            null
+        }
+    }
+
+    // Only reached after the platform's full-number lookup misses. Never discard
+    // the area code of a saved full number: the fallback is for local-only entries.
+    private fun findBrazilianContactWithoutAreaCode(ctx: Context, rawNumber: String): ContactInfo? {
+        val localNumber = BrazilianLocalContact.incomingLocalNumber(rawNumber) ?: return null
+        val cursor = try {
+            ctx.contentResolver.query(
+                Phone.CONTENT_URI,
+                arrayOf(Phone.CONTACT_ID, Phone.DISPLAY_NAME, Phone.PHOTO_URI, Phone.NUMBER),
+                null, null, null
+            )
+        } catch (_: SecurityException) {
+            return null
+        }
+        var match: ContactInfo? = null
+        cursor?.use {
+            val idIndex = it.getColumnIndexOrThrow(Phone.CONTACT_ID)
+            val nameIndex = it.getColumnIndexOrThrow(Phone.DISPLAY_NAME)
+            val photoIndex = it.getColumnIndexOrThrow(Phone.PHOTO_URI)
+            val numberIndex = it.getColumnIndexOrThrow(Phone.NUMBER)
+            while (it.moveToNext()) {
+                if (!BrazilianLocalContact.matchesSavedLocalNumber(localNumber, it.getString(numberIndex))) continue
+                val candidate = ContactInfo(it.getString(idIndex), it.getString(nameIndex), it.getString(photoIndex))
+                // Duplicate rows for the same contact are common after Google/WhatsApp sync.
+                // Distinct contacts with the same local number remain ambiguous.
+                if (match != null && match.id != candidate.id) return null
+                match = candidate
+            }
+        }
+        return match
     }
 
     fun findContactByNumberPrefix(

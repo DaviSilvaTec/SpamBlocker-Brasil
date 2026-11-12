@@ -96,15 +96,15 @@ fun PopupDialog(
                     .maxScreenHeight(0.9f)
                     .wrapContentWidth()
                     .widthIn(
-                        min = popupSize?.minWidth()?.dp ?: Dp.Unspecified,
-                        max = popupSize?.maxWidth(screenWidthDp())?.dp ?: Dp.Unspecified,
+                        min = popupSize?.let { min(it.minWidth(), if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) min(it.maxWidthDp.toFloat(), screenWidthDp()-24f) else it.maxWidth(screenWidthDp())) }?.dp ?: Dp.Unspecified,
+                        max = popupSize?.let { if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) min(it.maxWidthDp.toFloat(), screenWidthDp()-24f) else it.maxWidth(screenWidthDp()) }?.dp ?: Dp.Unspecified,
                     )
                     .imePadding(), // preserve padding for IME, show the scroll bar when IME appears
                 border = BorderStroke(1.dp, color = C.dialogBg.lighten(0.1f)),
                 colors = CardDefaults.cardColors(
                     containerColor = G.palette.dialogBg,
                 ),
-                shape = RoundedCornerShape(4.dp)
+                shape = RoundedCornerShape(if(spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 24.dp else 4.dp)
             ) {
                 ColumnCenterSpaced(
                     space = contentGap,

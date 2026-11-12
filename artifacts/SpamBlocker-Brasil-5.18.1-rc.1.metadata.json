@@ -1,0 +1,44 @@
+{
+  "product": "SpamBlocker Brasil",
+  "versionName": "5.18.1-rc.1",
+  "versionCode": 51801,
+  "applicationId": "spam.blocker.brasil",
+  "variant": "brasilDebug",
+  "source_repository": "https://github.com/aj3423/SpamBlocker",
+  "base_tag": "v5.18",
+  "base_commit": "1b2bf9ec90fd9c53a0b1d973e45d3675c77198b0",
+  "branch": "fix/brasil-contatos-sem-ddd",
+  "source_status": "uncommitted changes; snapshot and hashes included",
+  "source_files_sha256": {
+    ".gitignore": "1f1291ed99a64ff0cdbf42857f4351f42889ab338927c5ac5053972454dd9c98",
+    "BRASIL.md": "267404705d25e303927fadb99d46c020b1faf9f28e0134af30927dda4630780a",
+    "app/build.gradle.kts": "37fbe057be62b61e0f887b36bb47a33e9a1260fce6b47eaad91e0f385c4f10a3",
+    "app/src/androidTest/java/spam/blocker/util/BrazilianContactLookupTest.kt": "81e9dccc329a8ff3769d5c2018c606b88fb2f2c8ab393f3c5d3e46af782b2276",
+    "app/src/androidTest/java/spam/blocker/util/ExistingContactProbeTest.kt": "481cd7039e64fffcd910d90339d274e4d689536f010dbd03a713f1072c8532d4",
+    "app/src/brasil/res/values-pt-rBR/strings.xml": "2a95f4a13d9b62b5893b823d924545d6bc6722bb06f0d5a180b0804f109663f9",
+    "app/src/brasil/res/values/strings.xml": "2a95f4a13d9b62b5893b823d924545d6bc6722bb06f0d5a180b0804f109663f9",
+    "app/src/main/java/spam/blocker/util/BrazilianLocalContact.kt": "6289c8edac11c2b779e0c5014b52aa9f69a02604ff1adad2f3e2cb8b93a9f8c6",
+    "app/src/main/java/spam/blocker/util/Contact.kt": "2ba640be0083e9fec4f0eca54997d0a551616cb8f5cc3c4331c541a6f251428f",
+    "app/src/test/java/spam/blocker/util/BrazilianLocalContactTest.kt": "5634f8dd4d154b6ef3fe6a6a0aa81bd1cff248e7cfacdc9126be4b1bf210817c",
+    "local.properties": "fafd9aa262d9b28cfbcbf6e39e5d018433d6ac79d1a8e39d0604b2d01750fcd9"
+  },
+  "apk": "SpamBlocker-Brasil-5.18.1-rc.1-debug.apk",
+  "size": 43665274,
+  "sha256": "2413b629d1ca2d46ad8f75404fca0547c37fdaee6747693358e7dfc1902ac99d",
+  "signing_certificate_sha256": "7b7ec8dd5e3bd6096426cdb0923482542dcddb34a6f8634c04f11660c5f45a68",
+  "signing_type": "Android Debug; different from upstream",
+  "installed_on": [
+    "Samsung SM-A536E Android 16",
+    "AllGateAPI31 emulator Android 12"
+  ],
+  "validation": {
+    "unit_tests": "4 passed",
+    "emulator_contact_provider_tests": "4 passed",
+    "samsung_existing_contact_probe": "1 passed; no contact changes",
+    "samsung_rule_simulation": "allowed by Contacts",
+    "samsung_call_screening_role": "spam.blocker.brasil",
+    "actual_incoming_call": "pending user confirmation",
+    "lint": "24 errors, 101 warnings, 2 hints inherited; error files unchanged from v5.18"
+  },
+  "created_at": "2026-11-11T20:43:02-03:00"
+}

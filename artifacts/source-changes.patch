@@ -1,0 +1,130 @@
+diff --git a/.gitignore b/.gitignore
+index 5af2490..abf9b6e 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -9,4 +9,6 @@ app/release/
+ app/debug/
+ auto_translate/go.sum
+ local.properties
++/artifacts/**/*.apk
++/artifacts/*.zip
+ auto_translate/.vscode/
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+index b8711c3..39b35f6 100644
+--- a/app/build.gradle.kts
++++ b/app/build.gradle.kts
+@@ -32,12 +32,20 @@ android {
+         targetSdk = 36
+         versionCode = 518
+         versionName = "5.18"
++        buildConfigField("boolean", "BRAZIL_LOCAL_CONTACT_MATCHING", "false")
+ 
+         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+     }
+ 
+     flavorDimensions += "market"
+     productFlavors {
++        create("brasil") {
++            dimension = "market"
++            applicationId = "spam.blocker.brasil"
++            versionCode = 51801
++            versionName = "5.18.1-rc.1"
++            buildConfigField("boolean", "BRAZIL_LOCAL_CONTACT_MATCHING", "true")
++        }
+         create("fdroid") {
+             dimension = "market"
+             applicationId = "spam.blocker"
+@@ -96,6 +104,10 @@ android {
+     }
+ }
+ 
++tasks.withType<Test>().configureEach {
++    useJUnitPlatform()
++}
++
+ tasks.configureEach {
+     if (name.contains("ReleaseNoR8") && name.contains("lintVital", ignoreCase = true)) {
+         enabled = false
+@@ -126,6 +138,7 @@ dependencies {
+ 
+     // testing
+     testImplementation(libs.junit.jupiter)
++    testRuntimeOnly("org.junit.platform:junit-platform-launcher:${libs.versions.junitJupiter.get()}")
+     androidTestImplementation(libs.androidx.junit)
+     androidTestImplementation(libs.androidx.espresso.core)
+     androidTestImplementation(libs.mockk)
+diff --git a/app/src/main/java/spam/blocker/util/Contact.kt b/app/src/main/java/spam/blocker/util/Contact.kt
+index 1090492..53aa940 100644
+--- a/app/src/main/java/spam/blocker/util/Contact.kt
++++ b/app/src/main/java/spam/blocker/util/Contact.kt
+@@ -8,7 +8,9 @@ import android.graphics.ImageDecoder
+ import android.net.Uri
+ import android.provider.ContactsContract
+ import android.provider.ContactsContract.CommonDataKinds.GroupMembership
++import android.provider.ContactsContract.CommonDataKinds.Phone
+ import android.provider.ContactsContract.PhoneLookup
++import spam.blocker.BuildConfig
+ 
+ data class ContactInfo(
+     val id: String,
+@@ -92,7 +94,42 @@ object Contacts {
+                 return ci
+             }
+         }
+-        return null
++        return if (BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) {
++            findBrazilianContactWithoutAreaCode(ctx, rawNumber)
++        } else {
++            null
++        }
++    }
++
++    // Only reached after the platform's full-number lookup misses. Never discard
++    // the area code of a saved full number: the fallback is for local-only entries.
++    private fun findBrazilianContactWithoutAreaCode(ctx: Context, rawNumber: String): ContactInfo? {
++        val localNumber = BrazilianLocalContact.incomingLocalNumber(rawNumber) ?: return null
++        val cursor = try {
++            ctx.contentResolver.query(
++                Phone.CONTENT_URI,
++                arrayOf(Phone.CONTACT_ID, Phone.DISPLAY_NAME, Phone.PHOTO_URI, Phone.NUMBER),
++                null, null, null
++            )
++        } catch (_: SecurityException) {
++            return null
++        }
++        var match: ContactInfo? = null
++        cursor?.use {
++            val idIndex = it.getColumnIndexOrThrow(Phone.CONTACT_ID)
++            val nameIndex = it.getColumnIndexOrThrow(Phone.DISPLAY_NAME)
++            val photoIndex = it.getColumnIndexOrThrow(Phone.PHOTO_URI)
++            val numberIndex = it.getColumnIndexOrThrow(Phone.NUMBER)
++            while (it.moveToNext()) {
++                if (!BrazilianLocalContact.matchesSavedLocalNumber(localNumber, it.getString(numberIndex))) continue
++                val candidate = ContactInfo(it.getString(idIndex), it.getString(nameIndex), it.getString(photoIndex))
++                // Duplicate rows for the same contact are common after Google/WhatsApp sync.
++                // Distinct contacts with the same local number remain ambiguous.
++                if (match != null && match.id != candidate.id) return null
++                match = candidate
++            }
++        }
++        return match
+     }
+ 
+     fun findContactByNumberPrefix(
+@@ -221,4 +258,4 @@ object Contacts {
+ 
+         return groupNames
+     }
+-}
+\ No newline at end of file
++}
+diff --git a/local.properties b/local.properties
+index c5991d1..52fc67f 100644
+--- a/local.properties
++++ b/local.properties
+@@ -5,4 +5,4 @@
+ # For customization when using a Version Control System, please read the
+ # header note.
+ #Fri Aug 23 16:54:05 CST 2024
+-sdk.dir=/root/Android/Sdk
++sdk.dir=/home/usuario/Android/Sdk

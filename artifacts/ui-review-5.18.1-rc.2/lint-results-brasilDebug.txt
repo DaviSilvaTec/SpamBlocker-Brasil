@@ -1,0 +1,809 @@
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/util/pdu/pdu/PduPersister.java:1426: Error: Call requires permission which may be rejected by user: code should explicitly check to see if permission is available (with checkPermission) or explicitly handle a potential SecurityException [MissingPermission]
+            for (SubscriptionInfo subInfo : subscriptionManager.getActiveSubscriptionInfoList()) {
+                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/util/pdu/pdu/PduPersister.java:1427: Error: Call requires permission which may be rejected by user: code should explicitly check to see if permission is available (with checkPermission) or explicitly handle a potential SecurityException [MissingPermission]
+                final String myNumber = mContext.getSystemService(TelephonyManager.class).
+                                        ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/util/SimUtils.kt:36: Error: Call requires permission which may be rejected by user: code should explicitly check to see if permission is available (with checkPermission) or explicitly handle a potential SecurityException [MissingPermission]
+        subsManager?.activeSubscriptionInfoList?.forEach { info ->
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "MissingPermission":
+   This check scans through your code and libraries and looks at the APIs
+   being used, and checks this against the set of permissions required to
+   access those APIs. If the code using those APIs is called at runtime, then
+   the program will crash.
+
+   Furthermore, for permissions that are revocable (with targetSdkVersion 23),
+   client code must also be prepared to handle the calls throwing an exception
+   if the user rejects the request for permission at runtime.
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/build.gradle.kts:32: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk = 36
+        ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application or sdk runs on a version of Android that is more
+   recent than your targetSdk specifies that it has been tested with, various
+   compatibility modes kick in. This ensures that your application continues
+   to work, but it may look out of place. For example, if the targetSdk is
+   less than 14, your app may get an option button in the UI.
+
+   To fix this issue, set the targetSdk to the highest available value. Then
+   test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/util/Util.kt:635: Warning: Found dynamic locale changes, but did not find corresponding Play Core library calls for downloading languages and splitting by language is not disabled in the bundle configuration [AppBundleLocaleChanges]
+        configuration.setLocale(locale)
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "AppBundleLocaleChanges":
+   When changing locales at runtime (e.g. to provide an in-app language
+   switcher), the Android App Bundle must be configured to not split by locale
+   or the Play Core library must be used to download additional locales at
+   runtime.
+
+   https://developer.android.com/guide/app-bundle/configure-base#handling_language_changes
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/App.kt:47: Warning: Must call getDefaultUncaughtExceptionHandler() to get the existing handler, and call existingHandler.uncaughtException(thread, throwable) from your new handler [DefaultUncaughtExceptionDelegation]
+        Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
+        ^
+
+   Explanation for issues of type "DefaultUncaughtExceptionDelegation":
+   A default uncaught exception handler should usually call the existing
+   (previously set) default uncaught exception handler. This is especially
+   true on Android, which uses a default uncaught exception handler to handle
+   crashes. This lint check reports calls to
+   setDefaultUncaughtExceptionHandler unless we can also see a call to
+   getDefaultUncaughtExceptionHandler (to get the existing handler) in the
+   same module. Make sure you also call
+   existingHandler.uncaughtException(thread, throwable) from your new
+   handler.
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/wrapper/gradle-wrapper.properties:4: Warning: A newer version of Gradle than 9.7.1 is available: 9.9.1 [AndroidGradlePluginVersion]
+distributionUrl=https\://services.gradle.org/distributions/gradle-9.7.1-bin.zip
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/libs.versions.toml:2: Warning: A newer version of com.android.application than 9.4.1 is available: 9.5.1 [AndroidGradlePluginVersion]
+agp = "9.4.1"
+      ~~~~~~~
+
+   Explanation for issues of type "AndroidGradlePluginVersion":
+   This detector looks for usage of the Android Gradle Plugin where the
+   version you are using is not the current stable release. Using older
+   versions is fine, and there are cases where you deliberately want to stick
+   with an older version. However, you may simply not be aware that a more
+   recent version is available, and that is what this lint check helps find.
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/libs.versions.toml:20: Warning: A newer version of androidx.work:work-runtime-ktx than 2.11.2 is available: 2.12.0 [GradleDependency]
+workRuntimeKtx = "2.11.2"
+                 ~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/libs.versions.toml:5: Warning: A newer version of org.jetbrains.kotlin.plugin.compose than 2.4.20 is available: 2.4.21 [NewerVersionAvailable]
+kotlin = "2.4.20"
+         ~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/libs.versions.toml:11: Warning: A newer version of sh.calvin.reorderable:reorderable than 2.3.3 is available: 3.1.0 [NewerVersionAvailable]
+reorderable = "2.3.3"
+              ~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/libs.versions.toml:13: Warning: A newer version of com.googlecode.libphonenumber:libphonenumber than 9.0.39 is available: 9.0.43 [NewerVersionAvailable]
+libphonenumber = "9.0.39"
+                 ~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/libs.versions.toml:14: Warning: A newer version of com.googlecode.libphonenumber:geocoder than 3.39 is available: 3.43 [NewerVersionAvailable]
+geocoder = "3.39" # https://repo1.maven.org/maven2/com/googlecode/libphonenumber/geocoder/maven-metadata.xml
+           ~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/libs.versions.toml:15: Warning: A newer version of com.googlecode.libphonenumber:carrier than 2.39 is available: 2.43 [NewerVersionAvailable]
+carrier  = "2.39" # https://repo1.maven.org/maven2/com/googlecode/libphonenumber/carrier/maven-metadata.xml
+           ~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/libs.versions.toml:17: Warning: A newer version of org.jetbrains.kotlinx:kotlinx-serialization-json than 1.11.0 is available: 1.13.0 [NewerVersionAvailable]
+serialization = "1.11.0"
+                ~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/gradle/libs.versions.toml:18: Warning: A newer version of io.mockk:mockk-android than 1.14.11 is available: 1.14.12 [NewerVersionAvailable]
+mockk = "1.14.11"
+        ~~~~~~~~~
+
+   Explanation for issues of type "NewerVersionAvailable":
+   This detector checks with a central repository to see if there are newer
+   versions available for the dependencies used by this project. This is
+   similar to the GradleDependency check, which checks for newer versions
+   available in the Android SDK tools and libraries, but this works with any
+   MavenCentral dependency, and connects to the library every time, which
+   makes it more flexible but also much slower.
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/brasil/BrasilDesign.kt:88: Warning: Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize [ConfigurationScreenWidthHeight from androidx.compose.ui]
+    val landscape=LocalConfiguration.current.screenHeightDp < 400
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/brasil/BrasilDesign.kt:100: Warning: Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize [ConfigurationScreenWidthHeight from androidx.compose.ui]
+    val compact=LocalConfiguration.current.screenWidthDp<360 || LocalDensity.current.fontScale>1.2f
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/brasil/BrasilDesign.kt:129: Warning: Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize [ConfigurationScreenWidthHeight from androidx.compose.ui]
+    val compact=LocalConfiguration.current.screenHeightDp<700 || LocalDensity.current.fontScale>1.2f
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/main/MainActivity.kt:165: Warning: Using Configuration.screenHeightDp instead of LocalWindowInfo.current.containerSize [ConfigurationScreenWidthHeight from androidx.compose.ui]
+        val compactLandscape=LocalConfiguration.current.screenHeightDp<400
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ConfigurationScreenWidthHeight":
+   Configuration.screenWidthDp and Configuration.screenHeightDp have different
+   insets behaviour depending on target SDK version, and are rounded to the
+   nearest Dp. This means that using these values in composition to size a
+   layout can result in issues, as these values do not accurately represent
+   the actual available window size. Instead it is recommended to use
+   WindowInfo.containerSize which accurately represents the window size.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.ui
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/quick/Answered.kt:120: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+            ctx.getString(R.string.help_answered)
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/quick/Answered.kt:122: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+                    ctx.getString(R.string.answered_warning),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/api/ApiList.kt:92: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+            label = ctx.getString(R.string.export),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/api/ApiList.kt:102: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+                label = ctx.getString(R.string.priority),
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/api/ApiList.kt:132: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+                                    ctx.getString(R.string.undelete),
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/bot/BotList.kt:87: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+            val stateStr = ctx.getString(R.string.work_state_template)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/bot/BotList.kt:89: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+            val stopReasonStr = ctx.getString(R.string.stop_reason_template)
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/bot/BotList.kt:248: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+        ctx.getString(R.string.last_log),
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/bot/BotList.kt:249: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+        ctx.getString(R.string.export),
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/bot/BotList.kt:298: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+                                    ctx.getString(R.string.undelete),
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/quick/Dialed.kt:89: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+            ctx.getString(R.string.help_dialed)
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/misc/Languages.kt:69: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+            Lang("", ctx.getString(R.string.system))
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/regex/PushAlert.kt:384: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+                                ctx.getString(R.string.undelete),
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/quick/RecentApps.kt:84: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+                            prompt =  ctx.getString(R.string.prompt_go_to_permission_setting)
+                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/quick/RecentApps.kt:85: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+                                .format(ctx.getString(R.string.usage_statistics))
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/RingtonePicker.kt:43: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+            putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, ctx.getString(R.string.select_notification_sound))
+                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/SimCard.kt:88: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+                label = ctx.getString(R.string.any)
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/SimCard.kt:96: Error: Querying resource values using LocalContext.current is not configuration-aware and may return stale values if the Configuration changes [LocalContextGetResourceValueCall from androidx.compose.ui]
+                    label = ctx.getString(R.string.sim_slot_template).format("${sim.slotIndex + 1}")
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "LocalContextGetResourceValueCall":
+   Changes to the Configuration object will not cause LocalContext.current
+   reads to be invalidated, so calls to APIs such as Context.getString() will
+   not be updated when the Configuration changes, and so stale values might be
+   used. Instead, you can use Compose APIs such as stringResource,
+   colorResource, and painterResource - or LocalResources.current and query
+   properties from Resources directly. Using these APIs will invalidate
+   callers when the Configuration changes, to ensure that these calls reflect
+   the latest values.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.ui
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/misc/About.kt:39: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                    "${ctx.resources.getString(R.string.version)}:<br>&emsp;${BuildConfig.VERSION_NAME}<br><br>" +
+                       ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/misc/About.kt:40: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                            "${ctx.resources.getString(R.string.source_code)}:<br>&emsp;<a href=\"$REPO\">$REPO</a><br>"
+                               ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/service/bot/Actions1.kt:119: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+        val nDays = ctx.resources.getQuantityString(R.plurals.days, expiry, expiry)
+                    ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/service/bot/Actions1.kt:465: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+        val nDays = ctx.resources.getQuantityString(R.plurals.days, expiry, expiry)
+                    ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/service/bot/Actions2.kt:378: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                val items = ctx.resources.getStringArray(R.array.regex_action_add_mode)
+                            ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/service/bot/Actions2.kt:548: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                val items = ctx.resources.getStringArray(R.array.regex_action_add_mode)
+                            ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/quick/BlockType.kt:69: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+        ctx.resources.getStringArray(R.array.block_type_list).mapIndexed { index, label ->
+        ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/quick/BlockType.kt:159: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+        ctx.resources.getStringArray(R.array.block_type_list)
+        ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/history/HistoryFabs.kt:282: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                                    val nRows = ctx.resources.getQuantityString(R.plurals.rows, rows!!, rows)
+                                                ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/HtmlText.kt:95: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                        ctx.resources.getIdentifier(source, "drawable", ctx.packageName)
+                        ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/HtmlText.kt:95: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                        ctx.resources.getIdentifier(source, "drawable", ctx.packageName)
+                        ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/HtmlText.kt:97: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                        ctx.resources.getDrawable(resourceId, null).apply {
+                        ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/HtmlText.kt:97: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                        ctx.resources.getDrawable(resourceId, null).apply {
+                        ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/InputBox.kt:661: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                val ret = list + ctx.resources.getStringArray(R.array.regex_flags_list)
+                                 ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/regex/RegexList.kt:311: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+        ctx.resources.getStringArray(R.array.rule_dropdown_menu).mapIndexed { menuIndex, label ->
+        ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/regex/RegexMode.kt:363: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                        ctx.resources.getStringArray(R.array.block_type_list)
+                        ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/quick/SpamDB.kt:195: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+                        label = ctx.resources.getQuantityString(R.plurals.days, ttl, ttl),
+                                ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/WeekdaysPicker.kt:37: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+        val labels = LocalContext.current.resources.getStringArray(R.array.weekdays_abbrev)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/WeekdaysPicker.kt:87: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+        val labels = LocalContext.current.resources.getStringArray(R.array.weekdays_abbrev)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/util.kt:129: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+        val screenWidthPx = ctx.resources.displayMetrics.widthPixels
+                            ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/util.kt:138: Warning: Reading Resources using LocalContext.current.resources is not configuration-aware and may return stale values if the Configuration changes [LocalContextResourcesRead from androidx.compose.ui]
+        val screenHeightPx = ctx.resources.displayMetrics.heightPixels
+                             ~~~~~~~~~~~~~
+
+   Explanation for issues of type "LocalContextResourcesRead":
+   Changes to the Configuration object will not cause
+   LocalContext.current.resources reads to be invalidated, so calls to APIs
+   such as Resources.getString() will not be updated when the Configuration
+   changes. Instead, use LocalResources.current to retrieve the Resources -
+   this will invalidate callers when the Configuration changes, to ensure that
+   these calls reflect the latest values.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.ui
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/bot/ActionCard.kt:27: Warning: Modifier parameter should be named modifier [ModifierParameter from androidx.compose.ui]
+    cardModifier: Modifier,
+    ~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/service/bot/Actions4.kt:205: Warning: Modifier parameter should be named modifier [ModifierParameter from androidx.compose.ui]
+    cardModifier: Modifier,
+    ~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/StrokeButton.kt:105: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier,
+    ~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/StrokeButton.kt:190: Warning: Modifier parameter should be the first optional parameter [ModifierParameter from androidx.compose.ui]
+    modifier: Modifier = Modifier,
+    ~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/service/bot/Triggers.kt:1161: Warning: Modifier parameter should be named modifier [ModifierParameter from androidx.compose.ui]
+    cardModifier: Modifier,
+    ~~~~~~~~~~~~
+
+   Explanation for issues of type "ModifierParameter":
+   The first (or only) Modifier parameter in a Composable function should
+   follow the following rules:
+   - Be named modifier
+   - Have a type of Modifier
+   - Either have no default value, or have a default value of Modifier
+   - If optional, be the first optional parameter in the parameter list
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.ui
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/HtmlText.kt:95: Warning: Use of this function is discouraged because resource reflection makes it harder to perform build optimizations and compile-time verification of code. It is much more efficient to retrieve resources by identifier (e.g. R.foo.bar) than by name (e.g. getIdentifier("bar", "foo", null)). [DiscouragedApi]
+                        ctx.resources.getIdentifier(source, "drawable", ctx.packageName)
+                                      ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/HtmlText.kt:95: Warning: Use of this function is discouraged because resource reflection makes it harder to perform build optimizations and compile-time verification of code. It is much more efficient to retrieve resources by identifier (e.g. R.foo.bar) than by name (e.g. getIdentifier("bar", "foo", null)). [DiscouragedApi]
+                        ctx.resources.getIdentifier(source, "drawable", ctx.packageName)
+                                      ~~~~~~~~~~~~~
+
+   Explanation for issues of type "DiscouragedApi":
+   Discouraged APIs are allowed and are not deprecated, but they may be unfit
+   for common use (e.g. due to slow performance or subtle behavior).
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/setting/quick/Answered.kt:120: Error: Format string 'answered_warning' is not a valid format string so it should not be passed to String.format [StringFormatInvalid]
+            ctx.getString(R.string.help_answered)
+            ^
+    /home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values/strings_18.xml:82: This definition does not require arguments
+
+   Explanation for issues of type "StringFormatInvalid":
+   If a string contains a '%' character, then the string may be a formatting
+   string which will be passed to String.format from Java code to replace each
+   '%' occurrence with specific values.
+
+   This lint warning checks for two related problems:
+   (1) Formatting strings that are invalid, meaning that String.format will
+   throw exceptions at runtime when attempting to use the format string.
+   (2) Strings containing '%' that are not formatting strings getting passed
+   to a String.format call. In this case the '%' will need to be escaped as
+   '%%'.
+
+   NOTE: Not all Strings which look like formatting strings are intended for
+   use by String.format; for example, they may contain date formats intended
+   for android.text.format.Time#format(). Lint cannot always figure out that a
+   String is a date format, so you may get false warnings in those scenarios.
+   See the suppress help topic for information on how to suppress errors in
+   that case.
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-ar/strings_11.xml:41: Error: For locale "ar" (Arabic) the following quantity should also be defined: zero (e.g. "0") [MissingQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-ar/strings_5.xml:10: Error: For locale "ar" (Arabic) the following quantity should also be defined: zero (e.g. "0") [MissingQuantity]
+    <plurals name="days">
+    ^
+
+   Explanation for issues of type "MissingQuantity":
+   Different languages have different rules for grammatical agreement with
+   quantity. In English, for example, the quantity 1 is a special case. We
+   write "1 book", but for any other quantity we'd write "n books". This
+   distinction between singular and plural is very common, but other languages
+   make finer distinctions.
+
+   This lint check looks at each translation of a <plural> and makes sure that
+   all the quantity strings considered by the given language are provided by
+   this translation.
+
+   For example, an English translation must provide a string for
+   quantity="one". Similarly, a Czech translation must provide a string for
+   quantity="few".
+
+   https://developer.android.com/guide/topics/resources/string-resource.html#Plurals
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-tr/strings_15.xml:9: Warning: Repeated word "tek" in message: possible typo [Typos]
+        Hızlıca bakarak, geçmiş kayıtlarının kurallar tarafından kapsanıp kapsanmadığını zahmetsizce doğrulayabilir, böylece her birini tek tek test etmenize gerek kalmaz. <br>
+                                                                                                                                        ~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values/strings_15.xml:14: Warning: Did you mean "ic_history_indicator_!" instead of "ic_history_indicator_1"? [Typos]
+        <img src=\'ic_history_indicator_1\'/> <br>
+                   ~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-tr/strings_19.xml:86: Warning: Repeated word "ayrı" in message: possible typo [Typos]
+        Bir grup belirtilirse, ayrı ayrı gruplandırılacaklardır.
+                               ~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-tr/strings_23.xml:88: Warning: Repeated word "ayrı" in message: possible typo [Typos]
+        Arama ve SMS taraması da aşağıda ayrı ayrı etkinleştirilmelidir, bunlar yalnızca bu etkinleştirildiğinde çalışır.
+                                         ~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-de/strings_25.xml:84: Warning: Repeated word "der" in message: possible typo [Typos]
+        Jeder Filter hat einen Prioritätswert, wie der Begriff impliziert, bestimmt er die Reihenfolge, in der der Anruf geprüft wird. <br>
+                                                                                                           ~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-tr/strings_25.xml:111: Warning: Repeated word "tek" in message: possible typo [Typos]
+         &ensp; Diğer tüm filtreleri geçersiz kılmak için önceliği 999 yapın, böylece tek tek geçici olarak devre dışı bırakmanız gerekmez.
+                                                                                      ~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-tr/strings_30.xml:10: Warning: Repeated word "tekrar" in message: possible typo [Typos]
+        Telefonu tekrar tekrar uyandırır ve daha fazla pil tüketimine neden olabilir.
+                 ~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-de/strings_6.xml:79: Warning: "seit dem" is a common misspelling; did you mean "seitdem"? [Typos]
+    <string name="call_repeated_too_soon">Nur %s Millisekunden seit dem letzten Anruf von dieser Nummer, das erforderliche Minimum beträgt %s Millisekunden, ignorieren.</string>
+                                                               ~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-de/strings_7.xml:34: Warning: Repeated word "der" in message: possible typo [Typos]
+        &ensp; Der Regex wird mit dem Kontaktnamen abgeglichen, der der eingehenden Nummer zugeordnet ist.<br>
+                                                                ~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-de/strings_7.xml:42: Warning: Repeated word "der" in message: possible typo [Typos]
+        &ensp; Der Regex wird mit dem Namen der Kontaktgruppe abgeglichen, der der eingehenden Nummer zugeordnet ist, wodurch alle Kontakte in dieser Gruppe betroffen sind, sodass Sie sie nicht einzeln hinzufügen müssen und es auch bei Personaländerungen nicht aktualisiert werden muss.<br>
+                                                                           ~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-tr/strings_7.xml:43: Warning: Repeated word "tek" in message: possible typo [Typos]
+                 bu gruptaki tüm kişileri etkiler, böylece onları tek tek eklemenize gerek kalmaz,
+                                                                  ~~~~~~~
+
+   Explanation for issues of type "Typos":
+   This check looks through the string definitions, and if it finds any words
+   that look like likely misspellings, they are flagged.
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values/strings_18.xml:64: Warning: Formatting %d followed by words ("days"): This should probably be a plural rather than a string [PluralsCandidate]
+    <string name="help_answered">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values/strings_20.xml:63: Warning: Formatting %d followed by words ("seconds"): This should probably be a plural rather than a string [PluralsCandidate]
+    <string name="seconds_template">%d seconds</string>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values/strings_22.xml:174: Warning: Formatting %d followed by words ("seconds"): This should probably be a plural rather than a string [PluralsCandidate]
+    <string name="help_ringtone_delay">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values/strings_7.xml:42: Warning: Formatting %d followed by words ("duplicated"): This should probably be a plural rather than a string [PluralsCandidate]
+    <string name="confirm_delete_duplicated_rule">Confirm to delete %d duplicated Rules?</string>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "PluralsCandidate":
+   This lint check looks for potential errors in internationalization where
+   you have translated a message which involves a quantity and it looks like
+   other parts of the string may need grammatical changes.
+
+   For example, rather than something like this:
+     <string name="try_again">Try again in %d seconds.</string>
+   you should be using a plural:
+      <plurals name="try_again">
+           <item quantity="one">Try again in %d second</item>
+           <item quantity="other">Try again in %d seconds</item>
+       </plurals>
+   This will ensure that in other languages the right set of translations are
+   provided for the different quantity classes.
+
+   (This check depends on some heuristics, so it may not accurately determine
+   whether a string really should be a quantity. You can use tools:ignore to
+   filter out false positives.
+
+   https://developer.android.com/guide/topics/resources/string-resource.html#Plurals
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-zh-rCN/strings_13.xml:5: Warning: Inconsistent number of arguments in formatting string cleaning_up_spam_db; found both 1 here and 2 in values/strings_13.xml [StringFormatCount]
+    <string name="cleaning_up_spam_db">
+    ^
+    /home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values/strings_13.xml:5: Conflicting number of arguments (2) here
+
+   Explanation for issues of type "StringFormatCount":
+   When a formatted string takes arguments, it usually needs to reference the
+   same arguments in all translations (or all arguments if there are no
+   translations.
+
+   There are cases where this is not the case, so this issue is a warning
+   rather than an error by default. However, this usually happens when a
+   language is not translated or updated correctly.
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-tr/strings_11.xml:22: Warning: For language "tr" (Turkish) the following quantities are not relevant: few, many, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-de/strings_11.xml:23: Warning: For language "de" (German) the following quantities are not relevant: few, many, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-es/strings_11.xml:23: Warning: For language "es" (Spanish) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-fr/strings_11.xml:23: Warning: For language "fr" (French) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-ja/strings_11.xml:23: Warning: For language "ja" (Japanese) the following quantities are not relevant: few, many, one, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-pt-rBR/strings_11.xml:23: Warning: For language "pt" (Portuguese) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-uk/strings_11.xml:23: Warning: For language "uk" (Ukrainian) the following quantities are not relevant: two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-zh-rCN/strings_11.xml:23: Warning: For language "zh" (Chinese) the following quantities are not relevant: few, many, one, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-it/strings_11.xml:24: Warning: For language "it" (Italian) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-fa/strings_11.xml:37: Warning: For language "fa" (Persian) the following quantities are not relevant: few, many, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-ca/strings_11.xml:38: Warning: For language "ca" (Catalan) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-in/strings_11.xml:38: Warning: For language "in" (Indonesian) the following quantities are not relevant: few, many, one, two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-iw/strings_11.xml:38: Warning: For language "iw" (Hebrew) the following quantities are not relevant: few, many [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-ru/strings_11.xml:38: Warning: For language "ru" (Russian) the following quantities are not relevant: two [UnusedQuantity]
+    <plurals name="rows">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-ca/strings_5.xml:10: Warning: For language "ca" (Catalan) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-de/strings_5.xml:10: Warning: For language "de" (German) the following quantities are not relevant: few, many, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-es/strings_5.xml:10: Warning: For language "es" (Spanish) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-fa/strings_5.xml:10: Warning: For language "fa" (Persian) the following quantities are not relevant: few, many, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-fr/strings_5.xml:10: Warning: For language "fr" (French) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-in/strings_5.xml:10: Warning: For language "in" (Indonesian) the following quantities are not relevant: few, many, one, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-it/strings_5.xml:10: Warning: For language "it" (Italian) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-iw/strings_5.xml:10: Warning: For language "iw" (Hebrew) the following quantities are not relevant: few, many [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-ja/strings_5.xml:10: Warning: For language "ja" (Japanese) the following quantities are not relevant: few, many, one, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-pt-rBR/strings_5.xml:10: Warning: For language "pt" (Portuguese) the following quantities are not relevant: few, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-ru/strings_5.xml:10: Warning: For language "ru" (Russian) the following quantities are not relevant: two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-tr/strings_5.xml:10: Warning: For language "tr" (Turkish) the following quantities are not relevant: few, many, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-uk/strings_5.xml:10: Warning: For language "uk" (Ukrainian) the following quantities are not relevant: two [UnusedQuantity]
+    <plurals name="days">
+    ^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-zh-rCN/strings_5.xml:10: Warning: For language "zh" (Chinese) the following quantities are not relevant: few, many, one, two [UnusedQuantity]
+    <plurals name="days">
+    ^
+
+   Explanation for issues of type "UnusedQuantity":
+   Android defines a number of different quantity strings, such as zero, one,
+   few and many. However, many languages do not distinguish grammatically
+   between all these different quantities.
+
+   This lint check looks at the quantity strings defined for each translation
+   and flags any quantity strings that are unused (because the language does
+   not make that quantity distinction, and Android will therefore not look it
+   up).
+
+   For example, in Chinese, only the other quantity is used, so even if you
+   provide translations for zero and one, these strings will not be returned
+   when getQuantityString() is called, even with 0 or 1.
+
+   https://developer.android.com/guide/topics/resources/string-resource.html#Plurals
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/util/pdu/pdu/PduPersister.java:1427: Warning: Using getLine1Number to get device identifiers is not recommended [HardwareIds]
+                final String myNumber = mContext.getSystemService(TelephonyManager.class).
+                                        ^
+
+   Explanation for issues of type "HardwareIds":
+   Using these device identifiers is not recommended other than for high value
+   fraud prevention and advanced telephony use-cases. For advertising
+   use-cases, use AdvertisingIdClient$Info#getId and for analytics, use
+   InstanceId#getId.
+
+   https://developer.android.com/training/articles/user-data-ids.html
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/AndroidManifest.xml:139: Warning: Exported service does not require permission [ExportedService]
+        <service
+         ~~~~~~~
+
+   Explanation for issues of type "ExportedService":
+   Exported services (services which either set exported=true or contain an
+   intent-filter and do not specify exported=false) should define a permission
+   that an entity must have in order to launch the service or bind to it.
+   Without this, any application can use this service.
+
+   https://goo.gle/ExportedService
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/mipmap-anydpi-v26: Warning: This folder configuration (v26) is unnecessary; minSdkVersion is 29. Merge all the resources in this folder into mipmap-anydpi. [ObsoleteSdkInt]
+
+   Explanation for issues of type "ObsoleteSdkInt":
+   This check flags version checks that are not necessary, because the
+   minSdkVersion (or surrounding known API level) is already at least as high
+   as the version checked for.
+
+   Similarly, it also looks for resources in -vNN folders, such as values-v14
+   where the version qualifier is less than or equal to the minSdkVersion,
+   where the contents should be merged into the best folder.
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/Swipe.kt:152: Warning: Reading a value annotated with @FrequentlyChangingValue inside composition [FrequentlyChangingValue from androidx.compose.runtime]
+            if (state.offset > 0) { // swiping <-
+                      ~~~~~~
+
+   Explanation for issues of type "FrequentlyChangingValue":
+   Reading a value annotated with @FrequentlyChangingValue inside composition
+   can cause performance issues due to frequent recompositions. To avoid
+   frequent recompositions, instead consider:
+
+   - Using derivedStateOf to filter state changes based on a provided
+   calculation. For example, rather than recomposing on every scroll position
+   change, only recomposing if the scroll position changes from 0 (at the top
+   of the list) to greater than 0 (not at the top of the list), and vice
+   versa.
+   - Using snapshotFlow to create a flow of changes from a provided state.
+   This can then be collected inside a LaunchedEffect, and used to make
+   changes without needing to recompose.
+   - If using Compose UI, read this value inside measure / layout / draw,
+   depending on where it is needed. This will cause invalidation of the
+   corresponding phase, instead of a recomposition. See developer.android.com
+   for more information on Jetpack Compose phases.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.runtime
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/DrawableImage.kt:68: Hint: Prefer mutableIntStateOf instead of mutableStateOf [AutoboxingStateCreation from androidx.compose.runtime]
+    private var drawInvalidateTick by mutableStateOf(0)
+                                      ~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/service/bot/Triggers.kt:1021: Hint: Prefer mutableIntStateOf instead of mutableStateOf [AutoboxingStateCreation from androidx.compose.runtime]
+        var delaySec by retain { mutableStateOf(rule.delaySec) }
+                                 ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "AutoboxingStateCreation":
+   Calling mutableStateOf<T>() when T is either backed by a primitive type on
+   the JVM or is a value class results in a state implementation that requires
+   all state values to be boxed. This usually causes an additional allocation
+   for each state write, and adds some additional work to auto-unbox values
+   when reading the value of the state. Instead, prefer to use a specialized
+   primitive state implementation for Int, Long, Float, and Double when the
+   state does not need to track null values and does not override the default
+   SnapshotMutationPolicy. See mutableIntStateOf(), mutableLongStateOf(),
+   mutableFloatStateOf(), and mutableDoubleStateOf() for more information.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.runtime
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp: Warning: The resource R.mipmap.ic_launcher_round appears to be unused [UnusedResources]
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/xml/keep_no_shrink.xml:2: Warning: The resource R.xml.keep_no_shrink appears to be unused [UnusedResources]
+<resources xmlns:tools="http://schemas.android.com/tools"
+^
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values/strings_30.xml:89: Warning: The resource R.string.filters appears to be unused [UnusedResources]
+    <string name="filters">Filters</string>
+            ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests=true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests=true.
+
+   Available options:
+
+   **skip-libraries** (default is true):
+   Whether the unused resource check should skip reporting unused resources in libraries.
+
+   Many libraries will declare resources that are part of the library surface; other modules depending on the library will also reference the resources. To avoid reporting all these resources as unused (in the context of a library), the unused resource check normally skips reporting unused resources in libraries. Instead, run the unused resource check on the consuming app module (along with `checkDependencies=true`).
+
+   However, there are cases where you want to check that all the resources declared in a library are used; in that case, you can disable the skip option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UnusedResources">
+           <option name="skip-libraries" value="true" />
+       </issue>
+   </lint>
+   ```
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/widgets/SwitchBox.kt:71: Warning: State backed values should use the lambda overload of Modifier.offset [UseOfNonLambdaOffsetOverload from androidx.compose.foundation]
+                    .offset(x = thumbOffset.dp)
+                     ~~~~~~
+
+   Explanation for issues of type "UseOfNonLambdaOffsetOverload":
+   Modifier.offset() is recommended to be used with static arguments only to
+   avoid unnecessary recompositions. Modifier.offset{ } is preferred in the
+   cases where the arguments are backed by a State.
+
+   Vendor: Jetpack Compose
+   Identifier: androidx.compose.foundation
+   Feedback: https://issuetracker.google.com/issues/new?component=612128
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-ar/strings_21.xml:74: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="retry_attempt">جاري إعادة المحاولة (المحاولة %s/%s)...</string>
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/values-iw/strings_21.xml:74: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="retry_attempt">מנסה שוב (ניסיון %s/%s)...</string>
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "TypographyEllipsis":
+   You can replace the string "..." with a dedicated ellipsis character,
+   ellipsis character (u2026, &#8230;). This can help make the text more
+   readable.
+
+   https://en.wikipedia.org/wiki/Ellipsis
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/drawable/ic_history_indicator_1.png: Warning: Found bitmap drawable res/drawable/ic_history_indicator_1.png in densityless folder [IconLocation]
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/drawable/ic_history_indicator_2.png: Warning: Found bitmap drawable res/drawable/ic_history_indicator_2.png in densityless folder [IconLocation]
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/drawable/ic_history_indicator_3.png: Warning: Found bitmap drawable res/drawable/ic_history_indicator_3.png in densityless folder [IconLocation]
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/res/drawable/ic_history_indicator_4.png: Warning: Found bitmap drawable res/drawable/ic_history_indicator_4.png in densityless folder [IconLocation]
+
+   Explanation for issues of type "IconLocation":
+   The res/drawable folder is intended for density-independent graphics such
+   as shapes defined in XML. For bitmaps, move it to drawable-mdpi and
+   consider providing higher and lower resolution versions in drawable-ldpi,
+   drawable-hdpi and drawable-xhdpi. If the icon really is density independent
+   (for example a solid color) you can place it in drawable-nodpi.
+
+   https://developer.android.com/guide/practices/screens_support.html
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/util/Contact.kt:26: Warning: Use the KTX extension function String.toUri instead? [UseKtx]
+            val source = ImageDecoder.createSource(ctx.contentResolver, Uri.parse(iconUri))
+                                                                        ~~~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/ui/main/MainActivity.kt:82: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+        if(firstBrasilLaunch) { spf.prefs.edit().putBoolean("brasil_dashboard_seen",true).apply(); spf.activeTab=lastTab }
+                                ~~~~~~~~~~~~~~~~
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/src/main/java/spam/blocker/util/Util.kt:676: Warning: Use the KTX extension function String.toUri instead? [UseKtx]
+            val uri = Uri.parse(url)
+                      ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseKtx":
+   The Android KTX libraries decorates the Android platform SDK as well as
+   various libraries with more convenient extension functions available from
+   Kotlin, allowing you to use default parameters, named parameters, and
+   more.
+
+   Available options:
+
+   **remove-defaults** (default is true):
+   Whether to skip arguments that match the defaults provided by the extension.
+
+   Extensions often provide default values for some of the parameters. For example:
+   ```kotlin
+   fun Path.readLines(charset: Charset = Charsets.UTF_8): List<String> { return Files.readAllLines(this, charset) }
+   ```
+   This lint check will by default automatically omit parameters that match the default, so if your code was calling
+
+   ```kotlin
+   Files.readAllLines(file, Charset.UTF_8)
+   ```
+   lint would replace this with
+   ```kotlin
+   file.readLines()
+   ```
+   rather than
+
+   ```kotlin
+   file.readLines(Charset.UTF_8
+   ```
+   You can turn this behavior off using this option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UseKtx">
+           <option name="remove-defaults" value="true" />
+       </issue>
+   </lint>
+   ```
+
+   **require-present** (default is true):
+   Whether to only offer extensions already available.
+
+   This option lets you only have lint suggest extension replacements if those extensions are already available on the class path (in other words, you're already depending on the library containing the extension method.)
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UseKtx">
+           <option name="require-present" value="true" />
+       </issue>
+   </lint>
+   ```
+
+/home/usuario/workspace/altec/Bloqueador_de_chamadas/app/build.gradle.kts:144: Warning: Use version catalog instead [UseTomlInstead]
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseTomlInstead":
+   If your project is using a libs.versions.toml file, you should place all
+   Gradle dependencies in the TOML file. This lint check looks for version
+   declarations outside of the TOML file and suggests moving them (and in the
+   IDE, provides a quickfix to performing the operation automatically).
+
+24 errors, 107 warnings, 2 hints

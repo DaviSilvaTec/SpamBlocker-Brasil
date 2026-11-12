@@ -29,6 +29,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import spam.blocker.G
+import spam.blocker.BuildConfig
+import androidx.compose.ui.text.style.TextOverflow
 import spam.blocker.R
 import spam.blocker.db.HistoryRecord
 import spam.blocker.service.checker.parseCheckResultFromDb
@@ -86,7 +88,7 @@ fun HistoryCard(
                 .wrapContentSize()
         ) {
             Column(
-                modifier = modifier.padding(8.dp)
+                modifier = modifier.padding(if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 16.dp else 8.dp)
             ) {
                 val r = remember(record.result, record.reason) { parseCheckResultFromDb(ctx, record.result, record.reason) }
                 val contact = remember(record.peer) { Contacts.findContactByRawNumber(ctx, record.peer) }
@@ -99,7 +101,7 @@ fun HistoryCard(
                     } else {
                         // Use the hash code as color
                         val toHash = contact?.name ?: record.peer
-                        val color = Color(toHash.hashCode().toLong() or 0xff808080/* for higher contrast */)
+                        val color = if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) C.infoBlue.copy(alpha=.65f) else Color(toHash.hashCode().toLong() or 0xff808080/* for higher contrast */)
                         ResImage(R.drawable.ic_contact_circle, color = color, modifier = modifier)
                     }
                 }
@@ -164,7 +166,10 @@ fun HistoryCard(
                             }
                             Text(
                                 text = t,
-                                color = if (record.isBlocked()) C.error else C.success,
+                                color = if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) C.textGrey else if (record.isBlocked()) C.error else C.success,
+                                maxLines=if(record.expanded) 5 else 2,
+                                overflow=TextOverflow.Ellipsis,
+                                fontWeight=if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) FontWeight.SemiBold else null,
                                 fontSize = 18.sp,
                                 modifier = M.weight(1f)
                             )
@@ -194,6 +199,12 @@ fun HistoryCard(
                             )
                         }
 
+                        if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) Text(
+                            text=if(record.isTest) "SIMULAÇÃO" else if(record.isBlocked()) "BLOQUEADA" else "PERMITIDA",
+                            fontSize=11.sp,fontWeight=FontWeight.SemiBold,letterSpacing=.6.sp,
+                            color=if(record.isBlocked()) C.error else C.success,
+                            modifier=M.padding(top=8.dp,bottom=2.dp)
+                        )
                         // Row 3: Block Reason
                         RowVCenterSpaced(4, M.padding(vertical = if(record.expanded) 4.dp else 0.dp)) {
                             // Show a label when not expanded, and a clickable button when expanded

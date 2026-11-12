@@ -22,6 +22,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import spam.blocker.ui.M
+import spam.blocker.BuildConfig
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.foundation.layout.heightIn
 import spam.blocker.util.Lambda
 
 // The builtin FloatingActionButton is not customizable.
@@ -36,6 +40,20 @@ fun Fab(
     iconSize: Int = 40,
     onClick: Lambda,
 ) {
+    if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) {
+        if(visible) androidx.compose.material3.OutlinedButton(
+            onClick={onClick()},modifier=modifier.heightIn(min=48.dp),
+            shape=androidx.compose.foundation.shape.RoundedCornerShape(14.dp),
+            contentPadding=androidx.compose.foundation.layout.PaddingValues(horizontal=12.dp,vertical=10.dp),
+            border=androidx.compose.foundation.BorderStroke(1.dp,bgColor.copy(alpha=.35f)),
+            colors=androidx.compose.material3.ButtonDefaults.outlinedButtonColors(contentColor=bgColor)
+        ) {
+            Icon(painter=painterResource(iconId),contentDescription=null,modifier=Modifier.size(20.dp))
+            text?.let { Text(it,modifier=Modifier.padding(start=6.dp),maxLines=1) }
+        }
+        return
+    }
+    val effectiveIconColor = if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) spam.blocker.G.palette.background else iconColor
     // Animate show/hide
     AnimatedVisibility(
         modifier = modifier,
@@ -50,6 +68,8 @@ fun Fab(
             ),
             modifier = Modifier
                 .wrapContentSize()
+                .heightIn(min=if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 48.dp else 0.dp)
+                .semantics { contentDescription=text ?: "Ações" }
                 .clickable {
                     onClick()
                 }
@@ -63,12 +83,12 @@ fun Fab(
                     Icon(
                         modifier = M
                             .size(iconSize.dp),
-                        tint = iconColor,
+                        tint = effectiveIconColor,
                         painter = painterResource(id = iconId),
                         contentDescription = ""
                     )
                     text?.let {
-                        Text(text = it, color = iconColor, fontSize = 16.sp)
+                        Text(text = it, color = effectiveIconColor, fontSize = 16.sp)
                     }
                 }
             }

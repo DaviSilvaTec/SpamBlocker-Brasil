@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
@@ -23,6 +24,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import spam.blocker.BuildConfig
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -174,7 +177,7 @@ fun SettingScreen() {
     FabWrapper(
         fabRow = { positionModifier ->
             Fab(
-                visible = !bottomReached,
+                visible = !bottomReached && !BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING,
                 text = if (alsoShowTestButtonLabel) Str(R.string.title_rule_testing) else null,
                 iconId = R.drawable.ic_tube,
                 iconColor = White,
@@ -197,8 +200,8 @@ fun SettingScreen() {
         NormalColumnScrollbar(state = scrollState) {
             Column(
                 modifier = M
-                    .verticalScroll(scrollState)
-                    .padding(top = 8.dp)
+                    .testTag("settings-scroll").verticalScroll(scrollState)
+                    .padding(top = 8.dp, bottom = if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 20.dp else 0.dp)
             ) {
                 // global
                 GloballyEnabled()
@@ -258,7 +261,7 @@ fun SettingScreen() {
                 Section(
                     title = Str(R.string.regex_settings),
                     horizontalPadding = 8,
-                    isCollapsed = remember { mutableStateOf(spfSections.isRegexSettingsCollapsed) },
+                    isCollapsed = rememberSaveable { mutableStateOf(if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) true else spfSections.isRegexSettingsCollapsed) },
                     onToggle = {
                         spfSections.isRegexSettingsCollapsed = it
                     },
@@ -314,7 +317,7 @@ fun SettingScreen() {
                 Section(
                     title = Str(R.string.instant_query),
                     horizontalPadding = 8,
-                    isCollapsed = remember { mutableStateOf(spfSections.isInstantQueryCollapsed) },
+                    isCollapsed = rememberSaveable { mutableStateOf(if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) true else spfSections.isInstantQueryCollapsed) },
                     onToggle = {
                         spfSections.isInstantQueryCollapsed = it
                     },
@@ -337,7 +340,7 @@ fun SettingScreen() {
                 Section(
                     title = Str(R.string.report_number),
                     horizontalPadding = 8,
-                    isCollapsed = remember { mutableStateOf(spfSections.isReportNumberCollapsed) },
+                    isCollapsed = rememberSaveable { mutableStateOf(if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) true else spfSections.isReportNumberCollapsed) },
                     onToggle = {
                         spfSections.isReportNumberCollapsed = it
                     },
@@ -360,7 +363,7 @@ fun SettingScreen() {
                 Section(
                     title = Str(R.string.automation),
                     horizontalPadding = 8,
-                    isCollapsed = remember { mutableStateOf(spfSections.isAutomationCollapsed) },
+                    isCollapsed = rememberSaveable { mutableStateOf(if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) true else spfSections.isAutomationCollapsed) },
                     content = {
                         Column {
                             // Bot list
@@ -417,7 +420,7 @@ fun SettingRow(
 ) {
     RowVCenter(
         modifier = modifier
-            .heightIn(min = SettingRowMinHeight.dp)
+            .heightIn(min = (if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 56 else SettingRowMinHeight).dp)
             .padding(vertical = 2.dp)
     ) {
         content()
@@ -433,10 +436,10 @@ fun SettingLabel(
     Text(
         text = stringResource(id = labelId),
         modifier = modifier,
-        maxLines = 1,
+        maxLines = if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) 3 else 1,
         fontSize = 16.sp,
         fontWeight = FontWeight.Medium,
-        color = color ?: G.palette.infoBlue,
+        color = color ?: if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) G.palette.textGrey else G.palette.infoBlue,
     )
 }
 
@@ -463,6 +466,33 @@ fun LabeledRow(
     content: @Composable RowScope.() -> Unit,
 ) {
 
+    if(BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) {
+        val stacked = spam.blocker.ui.screenWidthDp() < 360f || androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.2f
+        if(stacked) {
+            Column(modifier=modifier.padding(horizontal=paddingHorizontal.dp,vertical=6.dp)) {
+                RowVCenterSpaced(2,modifier=M.fillMaxWidth().heightIn(min=48.dp).then(if(toggleCollapse!=null) M.clickable { toggleCollapse() } else M)) {
+                    if(labelId!=null) SettingLabel(labelId,modifier=M.weight(1f),color=color)
+                    if(isCollapsed==true) GreyIcon16(R.drawable.ic_dropdown_arrow)
+                    helpTooltip?.let { BalloonQuestionMark(it) }
+                }
+                androidx.compose.runtime.CompositionLocalProvider(spam.blocker.ui.brasil.LocalSettingLabel provides (labelId?.let { stringResource(it) } ?: "Opção")) {
+                    RowVCenter(modifier=M.fillMaxWidth(),horizontalArrangement=Arrangement.End) { content() }
+                }
+            }
+            return
+        }
+        SettingRow(modifier=modifier.padding(horizontal=paddingHorizontal.dp)) {
+            RowVCenterSpaced(2,modifier=M.weight(1f).then(if(toggleCollapse!=null) M.clickable { toggleCollapse() } else M)) {
+                if(labelId!=null) SettingLabel(labelId,modifier=M.weight(1f),color=color)
+                if(isCollapsed==true) GreyIcon16(R.drawable.ic_dropdown_arrow)
+                helpTooltip?.let { BalloonQuestionMark(it) }
+            }
+            androidx.compose.runtime.CompositionLocalProvider(spam.blocker.ui.brasil.LocalSettingLabel provides (labelId?.let { stringResource(it) } ?: "Opção")) {
+                RowVCenter(horizontalArrangement=Arrangement.End) { content() }
+            }
+        }
+        return
+    }
     SettingRow(
         modifier = modifier
             .clickable {

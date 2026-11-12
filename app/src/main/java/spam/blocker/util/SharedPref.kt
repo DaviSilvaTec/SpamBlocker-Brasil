@@ -152,7 +152,7 @@ class spf { // for namespace only
             default: Color,
             labelId: Int
         ) : Delegate {
-            val d = Delegate(key, default, labelId)
+            val d = Delegate(key, if (spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING) spam.blocker.ui.brasil.brasilColor(key) else default, labelId)
             allColors += d // add each Delegate to the list 
             return d
         }
@@ -282,7 +282,7 @@ class spf { // for namespace only
 
         var searchOnlineUrl by str("search_online_url", "https://google.com/search?q={raw_number}")
 
-        var showTimeColor by bool("show_time_color", true)
+        var showTimeColor by bool("show_time_color", !spam.blocker.BuildConfig.BRAZIL_LOCAL_CONTACT_MATCHING)
         var timeColors by str(
             "time_colors",
             Json.encodeToString(listOf(
